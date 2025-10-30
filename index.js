@@ -26,16 +26,16 @@ find_line.appendChild(select);
 
 var content = new Map()
 content.set(0, [1, "по возрастанию"])
-content.set(1, [-1, "по возрастанию"])
-content.set(-1, [1, "по убыванию"])
+content.set(1, [-1, "по убыванию"])
+content.set(-1, [1, "по возрастанию"])
 var time_sort = document.createElement("div");
 time_sort.classList.add("time_sort");
 time_sort.id = "time_sort";
 time_sort.textContent = "по возрастанию";
 time_sort.value = 0;
 time_sort.addEventListener('click', () => {
-    time_sort.textContent = content.get(time_sort.value)[1];
     time_sort.value = content.get(time_sort.value)[0];
+    time_sort.textContent = content.get(time_sort.value)[1];
     updateTasks();
 })
 
@@ -174,17 +174,13 @@ function readTasks() {
         let count = localStorage.length;
         for (step = 0; step < count; step++){
             let variables = localStorage.getItem(`${step}`).split(" ");
-            console.log(variables);
             variables[0] = new Date(Number(variables[0].slice(6)),
                                     Number(variables[0].slice(3, 5)) - 1,
                                     Number(variables[0].slice(0, 2)) + 1);
-            console.log(variables[0]);
             variables[variables.length - 1] = (variables[variables.length - 1] == "true");
-            console.log(variables[variables.length - 1]);
             for (index = 2; index < variables.length - 1; index++){
                 variables[1] += " " + variables[index];
             }
-            console.log(variables[1]);
             createTask(date=variables[0], variables[1], variables[variables.length - 1]);
         }
     } catch {
@@ -335,7 +331,6 @@ function updateTasks(name="") {
     }
     filtration = select.selectedIndex;
     condition = time_sort.value;
-    console.log(name);
 
     let to_remove = [];
     field.childNodes.forEach(element => to_remove.push(element));
@@ -365,7 +360,6 @@ function updateTasks(name="") {
         }
 
         dates.sort((a, b) => condition * (b[0] - a[0]));
-        console.log(dates);
 
         for (step = 0; step < to_show.length; step++){
             to_show[step] = dates[step][1];
