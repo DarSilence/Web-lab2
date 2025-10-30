@@ -1,0 +1,53 @@
+body{
+    padding: 15px;
+    min-width: 610px;
+}
+
+.field{
+    min-width: 590px;
+    max-width: 810px;
+    /* padding-left: max(0px, 50% - 210px - max(200px, min(100% - 410px, 400px))/2); */
+}
+
+.task,
+.checked_task,
+.description,
+.find_line{
+    display: grid;
+    grid-template-columns: 50px 150px max(200px, min(100% - 410px, 400px)) 90px 25px;
+    gap: 20px;
+    grid-template-areas:
+        "status date name";
+    margin-bottom: 10px;
+    /* padding-left: max(0px, 50% - 210px - max(200px, min(100% - 410px, 400px))/2); */
+}
+
+.clear_button,
+.add_button{
+    grid-column: span 2;
+}
+
+.change_button,
+.confirm_button,
+.selector,
+.time_sort,
+.column_name{
+    text-align: center;
+}
+
+.description,
+.find_line{
+    grid-template-rows: 20px; 
+}
+
+.task{
+    background-color: bisque;
+    grid-template-rows: 25px; 
+    padding: 5px;
+}
+
+.checked_task{
+    background-color: rgb(220, 255, 168);
+    grid-template-rows: 25px; 
+    padding: 5px;
+}
