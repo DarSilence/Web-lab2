@@ -25,7 +25,7 @@ select.addEventListener('change', () => {
 find_line.appendChild(select);
 
 var content = new Map()
-content.set(0, [1, "по возрастанию"])
+content.set(0, [-1, "по возрастанию"])
 content.set(1, [-1, "по убыванию"])
 content.set(-1, [1, "по возрастанию"])
 var time_sort = document.createElement("div");
@@ -55,6 +55,7 @@ find_line.appendChild(name_search);
 let names = ["Статус", "Дата", "Название"]
 for (step = 0; step < 3; step++) {
     let column_name = document.createElement('div');
+    column_name.classList.add("column_name");
     column_name.textContent = names[step];
     description.appendChild(column_name);
 }
@@ -66,6 +67,19 @@ add_button.textContent = "Добавить задачу"
 
 add_button.addEventListener('click', () =>{
     addTask();
+})
+
+var clear_button = document.createElement("button");
+clear_button.classList.add("clear_button");
+clear_button.id = "clear_button";
+clear_button.textContent = "Очистить фильтры"
+
+clear_button.addEventListener('click', () =>{
+    select.selectedIndex = 0;
+    time_sort.value = 0;
+    time_sort.textContent = content.get(0)[1];
+    name_search.value = "";
+    updateTasks();
 })
 
 var field = document.createElement("div");
@@ -178,8 +192,8 @@ function readTasks() {
                                     Number(variables[0].slice(3, 5)) - 1,
                                     Number(variables[0].slice(0, 2)) + 1);
             variables[variables.length - 1] = (variables[variables.length - 1] == "true");
-            for (index = 2; index < variables.length - 1; index++){
-                variables[1] += " " + variables[index];
+            for (s_index = 2; s_index < variables.length - 1; s_index++){
+                variables[1] += " " + variables[s_index];
             }
             createTask(date=variables[0], variables[1], variables[variables.length - 1]);
         }
@@ -191,7 +205,8 @@ function readTasks() {
 function setUpPage() {
     let page = document.body;
 
-    page.append(add_button);
+    description.append(add_button);
+    find_line.append(clear_button);
     page.append(description);
     page.append(find_line);
     page.append(field);
@@ -201,7 +216,8 @@ function setUpPage() {
 
 function createTask(date, name="Пустая задача", completed=false){
     let task = document.createElement("div");
-    task.classList.add("task");
+    if (completed) {task.classList.add("checked_task");}
+    else {task.classList.add("task");}
     task.id = "task" + index;
     task.draggable = true;
 
