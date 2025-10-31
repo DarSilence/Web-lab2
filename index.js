@@ -39,7 +39,7 @@ content.set(-1, [1, "по возрастанию"])
 var time_sort = document.createElement("div");
 time_sort.classList.add("time_sort");
 time_sort.id = "time_sort";
-time_sort.textContent = "по возрастанию";
+time_sort.textContent = "по порядку";
 time_sort.value = 0;
 time_sort.addEventListener('click', () => {
     time_sort.value = content.get(time_sort.value)[0];
@@ -52,6 +52,7 @@ find_line.appendChild(time_sort);
 var name_search = document.createElement("input");
 name_search.classList.add("name_search");
 name_search.id = "name_search";
+name_search.placeholder = "Найти задачу";
 name_search.textContent = "";
 name_search.addEventListener('input', () => {
     updateTasks(name_search.value);
@@ -409,4 +410,3 @@ function updateTasks(name="") {
 
     saveTasks();
 }
-
