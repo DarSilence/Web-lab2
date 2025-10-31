@@ -15,7 +15,7 @@ body{
 .find_line{
     display: grid;
     /* grid-template-columns: 50px 150px max(200px, min(100% - 410px, 400px)) 95px 25px; */
-    grid-template-columns: 50px 160px max(200px, 100vw - 440px) 95px 25px;
+    grid-template-columns: 50px 160px max(200px, 100% - 410px) 95px 25px;
     gap: 20px;
     grid-template-areas:
         "status date name";
@@ -130,5 +130,6 @@ body{
 .checked_task.selected{
     background-color: rgb(166, 255, 33);
 }
+
 
 
