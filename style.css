@@ -1,10 +1,10 @@
 body{
     padding: 15px;
-    min-width: 680px;
+    min-width: 640px;
 }
 
 .field{
-    min-width: 650px;
+    min-width: 610px;
     /* max-width: 830px; */
     /* padding-left: max(0px, 50% - 210px - max(200px, min(100% - 410px, 400px))/2); */
 }
@@ -15,10 +15,11 @@ body{
 .find_line{
     display: grid;
     /* grid-template-columns: 50px 150px max(200px, min(100% - 410px, 400px)) 95px 25px; */
-    grid-template-columns: 50px 160px max(200px, 100% - 450px) 95px 25px;
-    grid-gap: 20px;
-    grid-template-areas:
-        "status date name";
+    /* grid-template-columns: 50px 20px 160px 20px max(200px, 100% - 410px) 20px 95px 20px 25px; */
+    grid-template-columns: 50px 160px max(200px, 100% - 410px) 95px 25px;
+    grid-gap: 60px;
+    /* grid-template-areas: */
+        /* "status pass date pass name pass change pass delete"; */
     margin-bottom: 10px;
     /* padding-left: max(0px, 50% - 210px - max(200px, min(100% - 410px, 400px))/2); */
 }
@@ -130,6 +131,7 @@ body{
 .checked_task.selected{
     background-color: rgb(166, 255, 33);
 }
+
 
 
 
