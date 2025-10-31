@@ -33,7 +33,7 @@ select.addEventListener('change', () => {
 find_line.appendChild(select);
 
 var content = new Map()
-content.set(0, [-1, "по возрастанию"])
+content.set(0, [-1, "по порядку"])
 content.set(1, [-1, "по убыванию"])
 content.set(-1, [1, "по возрастанию"])
 var time_sort = document.createElement("div");
@@ -409,3 +409,4 @@ function updateTasks(name="") {
 
     saveTasks();
 }
+
