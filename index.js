@@ -1,3 +1,11 @@
+var title = document.createElement("title");
+title.textContent = "To Do List";
+document.head.appendChild(title);
+
+var page_name = document.createElement("h1");
+page_name.textContent = "Your To Do's";
+document.body.appendChild(page_name);
+
 var description = document.createElement("div");
 description.classList.add("description");
 description.id = "description";
@@ -86,12 +94,13 @@ var field = document.createElement("div");
 field.className = "field";
 field.id = "field";
 
-field.addEventListener(`dragstart`, (evt) => {
-    evt.target.classList.add(`selected`);
+field.addEventListener(`dragstart`, (event) => {
+    event.target.classList.add(`selected`);
+    changeTask("task");
 })
 
-field.addEventListener(`dragend`, (evt) => {
-    evt.target.classList.remove(`selected`);
+field.addEventListener(`dragend`, (event) => {
+    event.target.classList.remove(`selected`);
 });
 
 const getNextElement = (cursorPosition, currentElement) => {
@@ -105,11 +114,11 @@ const getNextElement = (cursorPosition, currentElement) => {
     return nextElement;
 };
 
-field.addEventListener(`dragover`, (evt) => {
-    evt.preventDefault();
+field.addEventListener(`dragover`, (event) => {
+    event.preventDefault();
 
     const activeElement = field.querySelector(`.selected`);
-    const currentElement = evt.target;
+    const currentElement = event.target;
     const isMoveable = activeElement !== currentElement &&
     (currentElement.classList.contains(`task`) ||
     currentElement.classList.contains(`checked_task`));
@@ -118,17 +127,13 @@ field.addEventListener(`dragover`, (evt) => {
     return;
     }
 
-    // evt.clientY — вертикальная координата курсора в момент,
-    // когда сработало событие
-    const nextElement = getNextElement(evt.clientY, currentElement);
+    const nextElement = getNextElement(event.clientY, currentElement);
 
-    // Проверяем, нужно ли менять элементы местами
     if (
     nextElement && 
     activeElement === nextElement.previousElementSibling ||
     activeElement === nextElement
     ) {
-    // Если нет, выходим из функции, чтобы избежать лишних изменений в DOM
     return;
     }
 
@@ -225,6 +230,7 @@ function createTask(date, name="Пустая задача", completed=false){
     task_input.classList.add("task_input");
     task_input.id = "input" + index;
     task_input.value = name;
+    task_input.type = "text";
     task_input.disabled = true;
 
     let task_date = document.createElement("input");
@@ -279,28 +285,43 @@ function deleteTask(id) {
     saveTasks();
 }
 
-function changeTask(id) {
-    let task = document.getElementById(id);
-    const children = task.childNodes;
-    children.forEach(part => {
-        if (part.className == "task_date" || part.className == "task_input"){
-            if (part.disabled){
-                part.disabled = false;
-            } else {
-                part.disabled = true;
-            }
-        } 
-        if (part.className == "change_button"){
-            part.classList.remove("change_button");
-            part.classList.add("confirm_button");
-            part.textContent = "Подтвердить";
-        } else if (part.className == "confirm_button"){
-            part.classList.remove("confirm_button");
-            part.classList.add("change_button");
-            part.textContent = "Изменить";
-            updateTasks();
+function changeTask(t_id) {
+    for (step = 0; step < tasks.length; step++){
+        tasks[step]
+        const children = tasks[step].childNodes;
+        console.log(tasks[step].id, t_id);
+        if (tasks[step].id == t_id){
+            children.forEach(part => {
+                if (part.className == "task_date" || part.className == "task_input"){
+                    if (part.disabled){
+                        part.disabled = false;
+                    } else {
+                        part.disabled = true;
+                    }
+                } 
+                if (part.className == "change_button"){
+                    part.classList.remove("change_button");
+                    part.classList.add("confirm_button");
+                    part.textContent = "Подтвердить";
+                } else if (part.className == "confirm_button"){
+                    part.classList.remove("confirm_button");
+                    part.classList.add("change_button");
+                    part.textContent = "Изменить";
+                }
+            })
+        } else {
+            children.forEach(part => {
+                if (part.className == "task_date" || part.className == "task_input"){
+                    part.disabled = true;
+                } else if (part.className == "confirm_button"){
+                    part.classList.remove("confirm_button");
+                    part.classList.add("change_button");
+                    part.textContent = "Изменить";
+                }
+            })
         }
-    })
+    }
+    updateTasks();
 }
 
 function changeStatus(id, value){
