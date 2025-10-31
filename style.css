@@ -1,11 +1,11 @@
 body{
     padding: 15px;
-    min-width: 610px;
+    min-width: 630px;
 }
 
 .field{
-    min-width: 590px;
-    max-width: 810px;
+    min-width: 600px;
+    max-width: 830px;
     /* padding-left: max(0px, 50% - 210px - max(200px, min(100% - 410px, 400px))/2); */
 }
 
@@ -14,7 +14,7 @@ body{
 .description,
 .find_line{
     display: grid;
-    grid-template-columns: 50px 150px max(200px, min(100% - 410px, 400px)) 90px 25px;
+    grid-template-columns: 50px 150px max(200px, min(100% - 430px, 400px)) 95px 25px;
     gap: 20px;
     grid-template-areas:
         "status date name";
@@ -22,32 +22,118 @@ body{
     /* padding-left: max(0px, 50% - 210px - max(200px, min(100% - 410px, 400px))/2); */
 }
 
-.clear_button,
-.add_button{
-    grid-column: span 2;
+.description,
+.find_line{
+    grid-template-rows: 30px; 
 }
 
-.change_button,
-.confirm_button,
-.selector,
-.time_sort,
-.column_name{
+.task_input,
+.task_date{
+    color: black;
+    filter: brightness(100%);
+    font-size: large;
+}
+
+.task_input[disabled],
+.task_date[disabled] {
+    color: black;
+    filter: brightness(100%);
+    font-size: large;
+    background-color: rgba(255, 0, 0, 0);
+    border-color: rgba(255, 0, 0, 0);
+    border-style: solid;
     text-align: center;
 }
 
-.description,
-.find_line{
-    grid-template-rows: 20px; 
+.add_button,
+.clear_button{
+    grid-column: span 2;
+    background-color: #9dfda0;
+}
+.add_button:hover,
+.clear_button:hover{
+    background-color: #45a049;
+}
+
+/* .clear_button{
+    grid-column: span 2;
+    background-color: #a2ecff;
+}
+.clear_button:hover {
+    background-color: #70e2ff;
+} */
+
+.status{
+    accent-color: rgb(210, 255, 143);
+}
+.status:hover{
+    accent-color: rgb(200, 255, 117);
+}
+
+.confirm_button,
+.checked_task{
+    text-align: center;
+    font-size: small;
+}
+
+.task > .change_button, 
+.task > .confirm_button,
+.task > .delete_button{
+    background-color: rgb(250, 180, 179);
+}
+
+.task > .change_button:hover, 
+.task > .confirm_button:hover,
+.task > .delete_button:hover{
+    background-color: rgb(250, 160, 158);
+}
+
+.checked_task > .change_button, 
+.checked_task > .confirm_button,
+.checked_task > .delete_button{
+    background-color: rgb(210, 255, 143);
+}
+
+.checked_task > .change_button:hover, 
+.checked_task > .confirm_button:hover,
+.checked_task > .delete_button:hover{
+    background-color: rgb(200, 255, 117);
+}
+
+.time_sort,
+.column_name{
+    text-align: center;
+    font-size: large;
+    font-weight: 600;
+}
+
+.selector{
+    font-size: medium;
+    font-weight: 550;
+}
+
+.task,
+.checked_task{
+    grid-template-rows: 25px; 
+    padding: 8px;
+    border-radius: 8px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
 }
 
 .task{
-    background-color: bisque;
-    grid-template-rows: 25px; 
-    padding: 5px;
+    background-color: rgb(255, 205, 204);
 }
 
 .checked_task{
     background-color: rgb(220, 255, 168);
-    grid-template-rows: 25px; 
-    padding: 5px;
+}
+
+.task.selected{
+    background-color: rgb(255, 106, 104);
+}
+
+.checked_task.selected{
+    background-color: rgb(166, 255, 33);
 }
